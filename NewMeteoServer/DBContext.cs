@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NewMeteo
+namespace NewMeteoServer
 {
     public class DBContext : DbContext
     {

@@ -38,3 +38,4 @@ C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\NewMeteo.
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\ref\NewMeteo.dll
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\NewMeteo.pdb
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\NewMeteo.genruntimeconfig.cache
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\bin\Debug\net5.0-windows\Newtonsoft.Json.dll

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,6 +13,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace NewMeteo
 {
@@ -22,59 +25,42 @@ namespace NewMeteo
     {
         public string ErrorText = "";
 
+        private class AuthRequestForm
+        {
+            public string Name { get; set; }
+            public string Password { get; set; }
+            public string Type { get; set; }
+        }
+
         public Authorisation()
         {
             InitializeComponent();
         }
 
-        private void Enter(object sender, RoutedEventArgs e)
+        private async void Enter(object sender, RoutedEventArgs e)
         {
-            ErrorText = "";
-            DBContext db = new DBContext();
-            User user = FindUser(db, name.Text);
-            var way = (TabItem)_TabControl.SelectedItem;
+            var tabitem = (TabItem)_TabControl.SelectedItem;
+            var way = (string)tabitem.Header;
+            HttpClient client = new HttpClient();
+            var u = new AuthRequestForm { Name = name.Text, Password = password.Password, Type = way };
+            var json = JsonConvert.SerializeObject(u);
+            var data = new StringContent(json, Encoding.UTF8, "application/json");
+            var response = await client.PostAsync("http://localhost:8888/", data);
+            var respText = response.Content.ReadAsStringAsync().Result;
 
-            if ((string)way.Header == "Sign in")
+            
+            if (respText == "ok")
             {
-                if (user == null || user.Password != password.Password)
-                    ErrorText = "Wrong name or password";
-                else
-                {
-                    this.DialogResult = true;
-                    this.Close();
-                }
+                DialogResult = true;
+                Close();
             }
             else
             {
-                if (user != null)
-                    ErrorText = "Name is already registered";
-                else
-                {
-                    try
-                    {
-                        db.Users.Add(new User { Name = name.Text, Password = password.Password, Role = "Developer" });
-                        db.SaveChanges();
-                    }
-                    catch
-                    {
-                        ErrorText = "Database isn't responding";
-                    }
-                }
+                error_message.Content = respText;
             }
-
-            error_message.Content = ErrorText;
         }
 
-        private User FindUser(DBContext db, string param)
-        {
-            var list = db.Users.ToList();
-            foreach (var user in list)
-            {
-                if (user.Name == param)
-                    return user;
-            }
-            return null;
-        }
+        
 
     }
 }

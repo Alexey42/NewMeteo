@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aZeGblfX41AJa8Ebe1HJbX2Mq6XYY0O5SB98LSylDRJrNw+BH3FBLslzfJyc5W4WYb27jSGzEmWLqTTe5dQ3Fg==",
+  "dgSpecHash": "SQT3uwgv9mYACXCNxuegDTkRGG/i/t/s6+TzsdIyrv5ym5tlPY4u4q5VAx2RIYCTM/vZBMA1OC64USlFpekjdg==",
   "success": true,
   "projectFilePath": "C:\\Users\\55000\\source\\repos\\NewMeteo\\NewMeteo\\NewMeteo.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "C:\\Users\\55000\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\55000\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
     "C:\\Users\\55000\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\55000\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\55000\\.nuget\\packages\\npgsql\\5.0.10\\npgsql.5.0.10.nupkg.sha512",
     "C:\\Users\\55000\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\5.0.10\\npgsql.entityframeworkcore.postgresql.5.0.10.nupkg.sha512",
     "C:\\Users\\55000\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",
