@@ -5,13 +5,27 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NewMeteo"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Map editor" Height="450" Width="800">
     <Grid>
-        <Menu Margin="0,0,0,410">
-            <MenuItem Header="File" Height="24" Width="48">
-                <MenuItem Header="Open"></MenuItem>
+        <Menu HorizontalAlignment="Center" Height="22" VerticalAlignment="Top" Width="800">
+            <MenuItem Header="File">
+                <MenuItem Header="Open" Click="OpenMap"></MenuItem>
             </MenuItem>
         </Menu>
 
+        <Canvas x:Name="canvas_main" Margin="10,27,10,10">
+            <local:PanAndZoom x:Name="zoom_border" ClipToBounds="True" Background="LightGray" Margin="2,0,0,0">
+                <Image Name="img" HorizontalAlignment="Left" VerticalAlignment="Top"
+                       Width="{Binding Source.PixelWidth, RelativeSource={RelativeSource Self}}"
+                       Height="{Binding Source.PixelHeight, RelativeSource={RelativeSource Self}}">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform x:Name="scr_img_scale" CenterX="0.5" CenterY="0.5"></ScaleTransform>
+                            <TranslateTransform></TranslateTransform>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </local:PanAndZoom>
+        </Canvas>
     </Grid>
 </Window>
