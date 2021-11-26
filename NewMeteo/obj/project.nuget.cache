@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SQT3uwgv9mYACXCNxuegDTkRGG/i/t/s6+TzsdIyrv5ym5tlPY4u4q5VAx2RIYCTM/vZBMA1OC64USlFpekjdg==",
+  "dgSpecHash": "a5b1ou43+5qdq8MK5dH5DqNMHSdYxpx/6lEciZxxaUe6Hc7nM2xLFTo9fP8284fTgrV+yi0lj/NHm6AZiV7t8w==",
   "success": true,
   "projectFilePath": "C:\\Users\\55000\\source\\repos\\NewMeteo\\NewMeteo\\NewMeteo.csproj",
   "expectedPackageFiles": [
@@ -17,13 +17,20 @@
     "C:\\Users\\55000\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
     "C:\\Users\\55000\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
     "C:\\Users\\55000\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\55000\\.nuget\\packages\\microsoft.netcore.platforms\\5.0.0\\microsoft.netcore.platforms.5.0.0.nupkg.sha512",
+    "C:\\Users\\55000\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
     "C:\\Users\\55000\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512",
     "C:\\Users\\55000\\.nuget\\packages\\npgsql\\5.0.10\\npgsql.5.0.10.nupkg.sha512",
     "C:\\Users\\55000\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\5.0.10\\npgsql.entityframeworkcore.postgresql.5.0.10.nupkg.sha512",
+    "C:\\Users\\55000\\.nuget\\packages\\opencvsharp4\\4.5.3.20210817\\opencvsharp4.4.5.3.20210817.nupkg.sha512",
+    "C:\\Users\\55000\\.nuget\\packages\\opencvsharp4.runtime.win\\4.5.3.20210817\\opencvsharp4.runtime.win.4.5.3.20210817.nupkg.sha512",
+    "C:\\Users\\55000\\.nuget\\packages\\opencvsharp4.wpfextensions\\4.5.3.20210817\\opencvsharp4.wpfextensions.4.5.3.20210817.nupkg.sha512",
     "C:\\Users\\55000\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",
     "C:\\Users\\55000\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512",
     "C:\\Users\\55000\\.nuget\\packages\\system.diagnostics.diagnosticsource\\5.0.1\\system.diagnostics.diagnosticsource.5.0.1.nupkg.sha512",
-    "C:\\Users\\55000\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.6.0\\system.runtime.compilerservices.unsafe.4.6.0.nupkg.sha512"
+    "C:\\Users\\55000\\.nuget\\packages\\system.drawing.common\\5.0.2\\system.drawing.common.5.0.2.nupkg.sha512",
+    "C:\\Users\\55000\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\55000\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
   ],
   "logs": []
 }
