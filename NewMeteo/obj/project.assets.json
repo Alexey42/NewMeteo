@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     "net5.0-windows7.0": {
+      "HelixToolkit.Wpf/2.20.0": {
+        "type": "package",
+        "compile": {
+          "lib/net45/HelixToolkit.Wpf.dll": {}
+        },
+        "runtime": {
+          "lib/net45/HelixToolkit.Wpf.dll": {}
+        }
+      },
       "Microsoft.EntityFrameworkCore/5.0.12": {
         "type": "package",
         "dependencies": {
@@ -222,6 +231,18 @@
           "lib/netstandard2.1/Npgsql.EntityFrameworkCore.PostgreSQL.dll": {}
         }
       },
+      "Ookii.Dialogs.Wpf/5.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net5.0-windows7.0/Ookii.Dialogs.Wpf.dll": {}
+        },
+        "runtime": {
+          "lib/net5.0-windows7.0/Ookii.Dialogs.Wpf.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.WindowsDesktop.App"
+        ]
+      },
       "OpenCvSharp4/4.5.3.20210817": {
         "type": "package",
         "dependencies": {
@@ -344,6 +365,24 @@
     }
   },
   "libraries": {
+    "HelixToolkit.Wpf/2.20.0": {
+      "sha512": "k2n/7y5PSbBVvwz855BMi/N9zTLnPE4d3DVv8NsUzmZ/Aw+kLrbLnkOgvVpm8xu8ikTe2obsbKMXZ8y7c/23yQ==",
+      "type": "package",
+      "path": "helixtoolkit.wpf/2.20.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "AUTHORS",
+        "CONTRIBUTORS",
+        "LICENSE",
+        "README.md",
+        "helixtoolkit.png",
+        "helixtoolkit.wpf.2.20.0.nupkg.sha512",
+        "helixtoolkit.wpf.nuspec",
+        "lib/net45/HelixToolkit.Wpf.XML",
+        "lib/net45/HelixToolkit.Wpf.dll"
+      ]
+    },
     "Microsoft.EntityFrameworkCore/5.0.12": {
       "sha512": "NsGCTrPfGUXS4QFCLM5SlnfyED8JUswpcnguA3MSTBq6Zjnmkxjzrm6eDg4MBuiebZX2nfGONMavOKRWaZDjMw==",
       "type": "package",
@@ -696,6 +735,30 @@
         "postgresql.png"
       ]
     },
+    "Ookii.Dialogs.Wpf/5.0.0": {
+      "sha512": "Xrf3UCh6nPenr1z9Mr9PhBpWr8i7Klv0Zw1VdbbOOPFmTfYPyDOjGNn1OgYw0VJOze8ryQbl4lQbJFawAUoIuA==",
+      "type": "package",
+      "path": "ookii.dialogs.wpf/5.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "images/icon.png",
+        "lib/net462/Ookii.Dialogs.Wpf.dll",
+        "lib/net462/Ookii.Dialogs.Wpf.pdb",
+        "lib/net462/Ookii.Dialogs.Wpf.xml",
+        "lib/net5.0-windows7.0/Ookii.Dialogs.Wpf.dll",
+        "lib/net5.0-windows7.0/Ookii.Dialogs.Wpf.pdb",
+        "lib/net5.0-windows7.0/Ookii.Dialogs.Wpf.xml",
+        "lib/net6.0-windows7.0/Ookii.Dialogs.Wpf.dll",
+        "lib/net6.0-windows7.0/Ookii.Dialogs.Wpf.pdb",
+        "lib/net6.0-windows7.0/Ookii.Dialogs.Wpf.xml",
+        "lib/netcoreapp3.1/Ookii.Dialogs.Wpf.dll",
+        "lib/netcoreapp3.1/Ookii.Dialogs.Wpf.pdb",
+        "lib/netcoreapp3.1/Ookii.Dialogs.Wpf.xml",
+        "ookii.dialogs.wpf.5.0.0.nupkg.sha512",
+        "ookii.dialogs.wpf.nuspec"
+      ]
+    },
     "OpenCvSharp4/4.5.3.20210817": {
       "sha512": "LeTZ9634aGRTWhJxz75Xciq05aS2HxC25ECEQXNd0T7FROCI8GDDp5xAQ4XPmW5mwLWjRqd9h05XmN8bqju06A==",
       "type": "package",
@@ -1000,9 +1063,11 @@
   },
   "projectFileDependencyGroups": {
     "net5.0-windows7.0": [
+      "HelixToolkit.Wpf >= 2.20.0",
       "Microsoft.EntityFrameworkCore >= 5.0.12",
       "Newtonsoft.Json >= 13.0.1",
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 5.0.10",
+      "Ookii.Dialogs.Wpf >= 5.0.0",
       "OpenCvSharp4 >= 4.5.3.20210817",
       "OpenCvSharp4.WpfExtensions >= 4.5.3.20210817",
       "OpenCvSharp4.runtime.win >= 4.5.3.20210817"
@@ -1052,6 +1117,10 @@
       "net5.0-windows7.0": {
         "targetAlias": "net5.0-windows",
         "dependencies": {
+          "HelixToolkit.Wpf": {
+            "target": "Package",
+            "version": "[2.20.0, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[5.0.12, )"
@@ -1063,6 +1132,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": {
             "target": "Package",
             "version": "[5.0.10, )"
+          },
+          "Ookii.Dialogs.Wpf": {
+            "target": "Package",
+            "version": "[5.0.0, )"
           },
           "OpenCvSharp4": {
             "target": "Package",
@@ -1098,5 +1171,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.401\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Пакет \"HelixToolkit.Wpf 2.20.0\" был восстановлен с помощью \".NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8\", а не целевой платформы проекта \"net5.0-windows7.0\". Этот пакет может быть не полностью совместим с вашим проектом.",
+      "libraryId": "HelixToolkit.Wpf",
+      "targetGraphs": [
+        "net5.0-windows7.0"
+      ]
+    }
+  ]
 }

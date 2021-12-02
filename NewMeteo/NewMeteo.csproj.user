@@ -9,12 +9,24 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="3DViewWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Authorisation.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="ConfirmHeightWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="3DViewWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Authorisation.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="ConfirmHeightWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="MainWindow.xaml">

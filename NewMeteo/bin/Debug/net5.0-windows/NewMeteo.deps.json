@@ -8,15 +8,25 @@
     ".NETCoreApp,Version=v5.0": {
       "NewMeteo/1.0.0": {
         "dependencies": {
+          "HelixToolkit.Wpf": "2.20.0",
           "Microsoft.EntityFrameworkCore": "5.0.12",
           "Newtonsoft.Json": "13.0.1",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "5.0.10",
+          "Ookii.Dialogs.Wpf": "5.0.0",
           "OpenCvSharp4": "4.5.3.20210817",
           "OpenCvSharp4.WpfExtensions": "4.5.3.20210817",
           "OpenCvSharp4.runtime.win": "4.5.3.20210817"
         },
         "runtime": {
           "NewMeteo.dll": {}
+        }
+      },
+      "HelixToolkit.Wpf/2.20.0": {
+        "runtime": {
+          "lib/net45/HelixToolkit.Wpf.dll": {
+            "assemblyVersion": "2.20.0.0",
+            "fileVersion": "2.20.0.0"
+          }
         }
       },
       "Microsoft.EntityFrameworkCore/5.0.12": {
@@ -195,6 +205,14 @@
           }
         }
       },
+      "Ookii.Dialogs.Wpf/5.0.0": {
+        "runtime": {
+          "lib/net5.0-windows7.0/Ookii.Dialogs.Wpf.dll": {
+            "assemblyVersion": "5.0.0.0",
+            "fileVersion": "5.0.0.0"
+          }
+        }
+      },
       "OpenCvSharp4/4.5.3.20210817": {
         "dependencies": {
           "System.Drawing.Common": "5.0.2",
@@ -291,6 +309,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "HelixToolkit.Wpf/2.20.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-k2n/7y5PSbBVvwz855BMi/N9zTLnPE4d3DVv8NsUzmZ/Aw+kLrbLnkOgvVpm8xu8ikTe2obsbKMXZ8y7c/23yQ==",
+      "path": "helixtoolkit.wpf/2.20.0",
+      "hashPath": "helixtoolkit.wpf.2.20.0.nupkg.sha512"
     },
     "Microsoft.EntityFrameworkCore/5.0.12": {
       "type": "package",
@@ -417,6 +442,13 @@
       "sha512": "sha512-3K+YNZFdwMcTxY8aW9m6BHyzPce/WFdDKPESP4uCXk6xNS6Ujq6zhi7+KXkzb7iNB0OYretEuF3ezqkk4ZnJMg==",
       "path": "npgsql.entityframeworkcore.postgresql/5.0.10",
       "hashPath": "npgsql.entityframeworkcore.postgresql.5.0.10.nupkg.sha512"
+    },
+    "Ookii.Dialogs.Wpf/5.0.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-Xrf3UCh6nPenr1z9Mr9PhBpWr8i7Klv0Zw1VdbbOOPFmTfYPyDOjGNn1OgYw0VJOze8ryQbl4lQbJFawAUoIuA==",
+      "path": "ookii.dialogs.wpf/5.0.0",
+      "hashPath": "ookii.dialogs.wpf.5.0.0.nupkg.sha512"
     },
     "OpenCvSharp4/4.5.3.20210817": {
       "type": "package",

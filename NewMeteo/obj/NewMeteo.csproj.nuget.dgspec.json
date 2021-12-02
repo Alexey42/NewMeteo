@@ -44,6 +44,10 @@
         "net5.0-windows7.0": {
           "targetAlias": "net5.0-windows",
           "dependencies": {
+            "HelixToolkit.Wpf": {
+              "target": "Package",
+              "version": "[2.20.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[5.0.12, )"
@@ -55,6 +59,10 @@
             "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[5.0.10, )"
+            },
+            "Ookii.Dialogs.Wpf": {
+              "target": "Package",
+              "version": "[5.0.0, )"
             },
             "OpenCvSharp4": {
               "target": "Package",

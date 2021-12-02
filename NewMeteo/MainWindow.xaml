@@ -5,27 +5,61 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NewMeteo"
         mc:Ignorable="d"
-        Title="Map editor" Height="450" Width="800">
+        Title="Map editor" Height="450" Width="800"
+        KeyDown="Window_KeyDown">
     <Grid>
         <Menu HorizontalAlignment="Center" Height="22" VerticalAlignment="Top" Width="800">
             <MenuItem Header="File">
                 <MenuItem Header="Open" Click="OpenMap"></MenuItem>
+                <MenuItem Header="Save" Click="SaveMap"></MenuItem>
+                <MenuItem Header="Find" Click="FindMap"></MenuItem>
             </MenuItem>
+            <MenuItem Header="Bezier" Click="StartDrawingBezier" />
+            <MenuItem Header="Point" Click="StartDrawingPoint" />
+            <MenuItem Header="Crop" Click="CropImage" />
+            <MenuItem Header="3DView" Click="Show3D" />
         </Menu>
 
         <Canvas x:Name="canvas_main" Margin="10,27,10,10">
             <local:PanAndZoom x:Name="zoom_border" ClipToBounds="True" Background="LightGray" Margin="2,0,0,0">
-                <Image Name="img" HorizontalAlignment="Left" VerticalAlignment="Top"
+                <Image Name="img" MouseLeftButtonDown="img_MouseLeftButtonDown" MouseLeftButtonUp="img_MouseLeftButtonUp" MouseMove="img_MouseMove" HorizontalAlignment="Left" VerticalAlignment="Top"
                        Width="{Binding Source.PixelWidth, RelativeSource={RelativeSource Self}}"
                        Height="{Binding Source.PixelHeight, RelativeSource={RelativeSource Self}}">
                     <Image.RenderTransform>
                         <TransformGroup>
-                            <ScaleTransform x:Name="scr_img_scale" CenterX="0.5" CenterY="0.5"></ScaleTransform>
-                            <TranslateTransform></TranslateTransform>
+                            <ScaleTransform x:Name="img_scale" CenterX="0.5" CenterY="0.5"></ScaleTransform>
+                            <TranslateTransform x:Name="img_transform"></TranslateTransform>
                         </TransformGroup>
                     </Image.RenderTransform>
                 </Image>
             </local:PanAndZoom>
+            <Polyline x:Name="figurePolyline" Stroke="Red" StrokeThickness="2"></Polyline>
+            <Line x:Name="figureLine" Stroke="Red" StrokeThickness="2" IsHitTestVisible="False"></Line>
+            <Path x:Name="figure" Stroke="Red">
+                <Path.Data>
+                    <PathGeometry>
+                        <PathFigure x:Name="pathFigure" >
+                            <BezierSegment x:Name="bezierSegment" />
+                            <LineSegment x:Name="lineSegment"></LineSegment>
+                        </PathFigure>
+                    </PathGeometry>
+                </Path.Data>
+                <Path.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterX="0" CenterY="0"></ScaleTransform>
+                        <TranslateTransform></TranslateTransform>
+                    </TransformGroup>
+                </Path.RenderTransform>
+            </Path>
+            <Rectangle x:Name="WrapRectangle" Fill="Gray" Opacity="0.2"
+                StrokeThickness="1" StrokeDashArray="4 2" Stroke="White">
+                <Rectangle.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterX="0" CenterY="0"></ScaleTransform>
+                        <TranslateTransform></TranslateTransform>
+                    </TransformGroup>
+                </Rectangle.RenderTransform>
+            </Rectangle>
         </Canvas>
     </Grid>
 </Window>

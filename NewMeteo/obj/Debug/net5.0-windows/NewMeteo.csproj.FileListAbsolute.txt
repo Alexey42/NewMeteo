@@ -50,3 +50,9 @@ C:\Users\55000\source\repos\NewMeteo\NewMeteo\bin\Debug\net5.0-windows\runtimes\
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\bin\Debug\net5.0-windows\runtimes\win-x86\native\opencv_videoio_ffmpeg453.dll
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\bin\Debug\net5.0-windows\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\bin\Debug\net5.0-windows\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\3DViewWindow.g.cs
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\3DViewWindow.baml
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\bin\Debug\net5.0-windows\HelixToolkit.Wpf.dll
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\ConfirmHeightWindow.g.cs
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\ConfirmHeightWindow.baml
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\bin\Debug\net5.0-windows\Ookii.Dialogs.Wpf.dll
