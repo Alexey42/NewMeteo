@@ -19,16 +19,17 @@ namespace NewMeteo
     /// </summary>
     public partial class ConfirmHeightWindow : Window
     {
-        public float result = 0;
+        public double result = 0;
 
         public ConfirmHeightWindow()
         {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            result = float.Parse(TextBox.Text);
+            result = double.Parse(TextBox.Text);
             this.DialogResult = true;
         }
     }

@@ -12,10 +12,16 @@
     <Compile Update="3DViewWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Authorisation.xaml.cs">
+    <Compile Update="AuthorisationWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="ConfirmHeightWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="FindMapWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="SendMapWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -23,13 +29,19 @@
     <Page Update="3DViewWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Authorisation.xaml">
+    <Page Update="AuthorisationWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="ConfirmHeightWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="FindMapWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="SendMapWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

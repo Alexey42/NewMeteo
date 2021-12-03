@@ -54,7 +54,7 @@ namespace NewMeteo
             }
         }
 
-        private void View(float[,] value, Model3DGroup model_group)
+        private void View(double[,] value, Model3DGroup model_group)
         {
             // Make a mesh to hold the surface.
             MeshGeometry3D mesh = new MeshGeometry3D();

@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using OpenCvSharp;
 using OpenCvSharp.WpfExtensions;
+using System.Windows.Automation.Peers;
+using System.Windows.Automation.Provider;
 
 namespace NewMeteo
 {
@@ -31,7 +33,7 @@ namespace NewMeteo
         int[] WrapedArea;
         System.Windows.Point MouseStart;
         bool Cropping = false;
-        int Count = 0;
+        int BezierCount = 0;
         List<System.Windows.Point> FigurePoints;
 
         public MainWindow()
@@ -45,7 +47,7 @@ namespace NewMeteo
 
         private void AuthorizeUser(object sender, RoutedEventArgs e)
         {
-            Authorisation auth = new Authorisation();
+            AuthorisationWindow auth = new AuthorisationWindow();
             auth.ShowDialog();
             if (auth.DialogResult == true)
                 isAuth = true;
@@ -53,7 +55,15 @@ namespace NewMeteo
 
         private void FindMap(object sender, RoutedEventArgs e)
         {
+            FindMapWindow dialog = new FindMapWindow();
+            dialog.ShowDialog();
             
+            if (dialog.DialogResult == true)
+            {
+                Editor2D.History.Push(new Map(CurrentMap));
+                CurrentMap = dialog.result;
+                UpdateImageSource();
+            }
         }
 
         private void OpenMap(object sender, RoutedEventArgs e)
@@ -63,7 +73,7 @@ namespace NewMeteo
             if (ofd.ShowDialog() == true)
             {
                 CurrentMap = new Map(new Mat(ofd.FileName), ofd.FileName);
-                img.Source = CurrentMap.image.ToBitmapSource();
+                UpdateImageSource();
             }
         }
 
@@ -73,8 +83,15 @@ namespace NewMeteo
 
             if (ofd.ShowDialog() == true)
             {
-                Cv2.ImWrite(ofd.FileName, CurrentMap.image);
+                Cv2.ImWrite(ofd.FileName, CurrentMap.Image);
             }
+        }
+
+        private void SendMap(object sender, RoutedEventArgs e)
+        {
+            SendMapWindow dialog = new SendMapWindow(CurrentMap);
+            dialog.ShowDialog();
+            //if (dialog.DialogResult == true)
         }
 
         private void img_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -101,20 +118,26 @@ namespace NewMeteo
             }
             if (DrawingBezier)
             {
-                if (Count < 4)
+                if (BezierCount == 0)
                 {
-                    Count++;
-                    FigurePoints.Add(p);
-                    figurePolyline.Points.Add(new System.Windows.Point(xAbsolute, yAbsolute));
-                    figureLine.X1 = xAbsolute;
-                    figureLine.Y1 = yAbsolute;
                     figureLine.X2 = xAbsolute;
                     figureLine.Y2 = yAbsolute;
                     figurePolyline.Visibility = Visibility.Visible;
                     figureLine.Visibility = Visibility.Visible;
-                    if (Count == 4)
+                }
+                if (BezierCount < 4)
+                {
+                    BezierCount++;
+                    figureLine.X1 = xAbsolute;
+                    figureLine.Y1 = yAbsolute;
+                    FigurePoints.Add(p);
+                    figurePolyline.Points.Add(new System.Windows.Point(xAbsolute, yAbsolute));
+                    if (BezierCount == 4)
                     {
-                        FinishDrawingBezier(null, e);
+                        MenuItemAutomationPeer peer = new MenuItemAutomationPeer(btn);
+                        IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
+                        invokeProv.Invoke();
+                        //FinishDrawingBezier(null, e);
                     }
                 }
             }
@@ -122,7 +145,7 @@ namespace NewMeteo
             {
                 element.CaptureMouse();
                 FigurePoints.Add(p);
-                Editor2D.DrawPoint(xAbsolute, xRelative, yAbsolute, yRelative, canvas_main, CurrentMap.image);
+                Editor2D.DrawPoint(xAbsolute, xRelative, yAbsolute, yRelative, canvas_main, CurrentMap.Image);
             }
         }
 
@@ -160,13 +183,12 @@ namespace NewMeteo
                 if (wrapedSize == 0)
                     return;
 
-                Mat part = CurrentMap.image.SubMat(WrapedArea[1], WrapedArea[3], WrapedArea[0], WrapedArea[2]);
+                Mat part = CurrentMap.Image.SubMat(WrapedArea[1], WrapedArea[3], WrapedArea[0], WrapedArea[2]);
 
                 if (Cropping)
                 {
-                    CurrentMap.image = part;
-                    img.Source = part.ToBitmapSource();
-                    img.UpdateLayout();
+                    CurrentMap.Image = part;
+                    UpdateImageSource();
                     Cropping = false;
                 }
             }
@@ -199,9 +221,9 @@ namespace NewMeteo
             if (DrawingPoint && element.IsMouseCaptured)
             {
                 FigurePoints.Add(new System.Windows.Point(xRelative, yRelative));
-                Editor2D.DrawPoint(xAbsolute, xRelative, yAbsolute, yRelative, canvas_main, CurrentMap.image);
+                Editor2D.DrawPoint(xAbsolute, xRelative, yAbsolute, yRelative, canvas_main, CurrentMap.Image);
             }
-            if (DrawingBezier && Count > 0)
+            if (DrawingBezier && BezierCount > 0)
             {
                 figureLine.X2 = xAbsolute;
                 figureLine.Y2 = yAbsolute;
@@ -230,18 +252,21 @@ namespace NewMeteo
                 if (Child is Rectangle)
                     canvas_main.Children.Remove(Child);
             }
-            img.Source = CurrentMap.image.ToBitmapSource();
-            img.UpdateLayout();
+            UpdateImageSource();
 
-            float value = ConfirmHeight();
-            if (!float.IsNaN(value))
+            double value = ConfirmHeight();
+            if (!double.IsNaN(value))
             {
+                var p = FigurePoints.Last();
+                Editor2D.DrawText(-1, (int)p.X, -1, (int)p.Y, canvas_main, CurrentMap.Image, value.ToString());
                 CurrentMap.SetValues(FigurePoints, value);
+                UpdateImageSource();
             }
             else
             {
                 CancelAction();
             }
+            FigurePoints.Clear();
 
             DrawingPoint = false;
             zoom_border.isActive = true;
@@ -265,30 +290,32 @@ namespace NewMeteo
         {
             figurePolyline.Points.Clear();
 
-            if (Count == 4)
+            if (BezierCount == 4)
             {
-                FigurePoints = Editor2D.DrawBezier(FigurePoints, canvas_main, CurrentMap.image);
-                img.Source = CurrentMap.image.ToBitmapSource();
-                img.UpdateLayout();
-                float value = ConfirmHeight();
+                FigurePoints = Editor2D.DrawBezier(FigurePoints, canvas_main, CurrentMap.Image);
+                UpdateImageSource();
+                double value = ConfirmHeight();
 
-                if (!float.IsNaN(value))
+                if (!double.IsNaN(value))
                 {
+                    var p = FigurePoints.Last();
+                    Editor2D.DrawText(-1, (int)p.X, -1, (int)p.Y, canvas_main, CurrentMap.Image, value.ToString());
                     CurrentMap.SetValues(FigurePoints, value);
+                    UpdateImageSource();
                 }
                 else
                 {
                     CancelAction();
                 }
             }
-            Count = 0;
+            BezierCount = 0;
             FigurePoints.Clear();
 
             DrawingBezier = false;
             zoom_border.isActive = true;
         }
 
-        private float ConfirmHeight()
+        private double ConfirmHeight()
         {
             ConfirmHeightWindow dialog = new ConfirmHeightWindow();
             dialog.ShowDialog();
@@ -297,7 +324,7 @@ namespace NewMeteo
                 return dialog.result;
             }
             else
-                return float.NaN;
+                return double.NaN;
         }
 
         private void CropImage(object sender, RoutedEventArgs e)
@@ -327,8 +354,7 @@ namespace NewMeteo
         {
             var t = Editor2D.History.Pop();
             CurrentMap = t;
-            img.Source = CurrentMap.image.ToBitmapSource();
-            img.UpdateLayout();
+            UpdateImageSource();
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -341,6 +367,12 @@ namespace NewMeteo
                     break;
 
             }
+        }
+    
+        private void UpdateImageSource()
+        {
+            img.Source = CurrentMap.GetBS();
+            img.UpdateLayout();
         }
     }
 }

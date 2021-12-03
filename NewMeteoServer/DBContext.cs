@@ -11,6 +11,8 @@ namespace NewMeteoServer
     {
         public DbSet<User> Users { get; set; }
 
+        public DbSet<MapDB> Maps { get; set; }
+
         public DBContext()
         {
             Database.EnsureCreated();

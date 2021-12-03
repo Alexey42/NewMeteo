@@ -21,19 +21,13 @@ namespace NewMeteo
     /// <summary>
     /// Логика взаимодействия для Authorisation.xaml
     /// </summary>
-    public partial class Authorisation : Window
+    public partial class AuthorisationWindow : Window
     {
         public string ErrorText = "";
 
-        private class AuthRequestForm
+        public AuthorisationWindow()
         {
-            public string Name { get; set; }
-            public string Password { get; set; }
-            public string Type { get; set; }
-        }
-
-        public Authorisation()
-        {
+            WindowStartupLocation = WindowStartupLocation.CenterScreen;
             InitializeComponent();
         }
 
@@ -41,25 +35,22 @@ namespace NewMeteo
         {
             var tabitem = (TabItem)_TabControl.SelectedItem;
             var way = (string)tabitem.Header;
-            HttpClient client = new HttpClient();
-            var u = new AuthRequestForm { Name = name.Text, Password = password.Password, Type = way };
-            var json = JsonConvert.SerializeObject(u);
-            var data = new StringContent(json, Encoding.UTF8, "application/json");
-            var response = await client.PostAsync("http://localhost:8888/", data);
-            var respText = response.Content.ReadAsStringAsync().Result;
+            button.IsEnabled = false;
+            ServerRequest sr = new ServerRequest();
+            var resp = await sr.Auth(name.Text, password.Password, way);
 
-            
-            if (respText == "ok")
+            if (resp == "ok")
             {
                 DialogResult = true;
                 Close();
             }
             else
             {
-                error_message.Content = respText;
+                error_message.Content = resp;
             }
+            button.IsEnabled = true;
         }
-
+        
         
 
     }

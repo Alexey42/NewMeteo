@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NewMeteo"
         mc:Ignorable="d"
-        Title="ConfirmHeightWindow" Height="100" Width="150">
+        Title="ConfirmHeightWindow" Height="130" Width="150">
     <Grid>
         <Label Content="Значение:" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox x:Name="TextBox" HorizontalAlignment="Center" Margin="0,26,0,0" Text="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="65"/>

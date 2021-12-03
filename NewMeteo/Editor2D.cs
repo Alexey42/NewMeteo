@@ -49,6 +49,22 @@ namespace NewMeteo
             return result;
         }
 
+        public static void DrawText(int xAbs, int xRel, int yAbs, int yRel, Canvas canvas_main, 
+            Mat CurrentImage, string value)
+        {
+            if (xAbs >= 0 || yAbs >= 0)
+            {
+                var t = new Label();
+                t.Content = value;
+                t.Foreground = Brushes.Red;
+                t.FontSize = 8;
+                canvas_main.Children.Add(t);
+                Canvas.SetTop(t, yAbs);
+                Canvas.SetLeft(t, xAbs);
+            }
+            CurrentImage.PutText(value, new Point(xRel, yRel), HersheyFonts.HersheyComplex, 0.5, Scalar.Red);
+        }
+
         public static float[,] SmoothSurface(float[,] values)
         {
 

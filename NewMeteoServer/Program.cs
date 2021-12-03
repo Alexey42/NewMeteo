@@ -1,20 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using static NewMeteoServer.ServerRequestForms;
 
 namespace NewMeteoServer
 {
     class Program
     {
-        private class AuthRequestForm
-        {
-            public string Name { get; set; }
-            public string Password { get; set; }
-            public string Type { get; set; }
-        }
 
         static void Main(string[] args)
         {
@@ -39,15 +36,44 @@ namespace NewMeteoServer
                 {
                     json = reader.ReadToEnd();
                 }
-                var reqData = JsonConvert.DeserializeObject<AuthRequestForm>(json);
 
-                DBContext db = new DBContext();
-                User user = FindUser(db, reqData.Name);
+                var seg = request.Url.Segments;
+                if (seg[1] == "auth")
+                {
+                    var reqData = JsonConvert.DeserializeObject<AuthRequestForm>(json);
 
-                if (reqData.Type == "Sign in")
-                    responseString = SignIn(db, reqData, user);
-                else
-                    responseString = SignUp(db, reqData, user);
+                    DBContext db = new DBContext();
+                    User user = FindUser(db, reqData.Name);
+
+                    if (reqData.Type == "Sign in")
+                        responseString = SignIn(db, reqData, user);
+                    else
+                        responseString = SignUp(db, reqData, user);
+                }
+                if (seg[1] == "sendmap")
+                {
+                    var reqData = JsonConvert.DeserializeObject<MapRequestForm>(json);
+                    DBContext db = new DBContext();
+                    responseString = AddMap(db, reqData);
+
+                }
+                if (seg[1] == "getmap/")
+                {
+                    if (seg.Length < 3)
+                        responseString = "Not found";
+                    else
+                    {
+                        DBContext db = new DBContext();
+                        MapDB found = GetMap(db, seg[2]);
+                        if (found == null)
+                            responseString = "Not found";
+                        else
+                        {
+                            var u = new MapRequestForm { Name = found.Name, Bytes = found.Bytes, Values = found.Values };
+                            responseString = JsonConvert.SerializeObject(u);
+                        }
+                    }
+                }
 
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
                 response.ContentLength64 = buffer.Length;
@@ -66,6 +92,7 @@ namespace NewMeteoServer
             else
             {
                 result = "ok";
+                SessionInfo.ActiveUsers.Add(user);
             }
 
             return result;
@@ -84,6 +111,7 @@ namespace NewMeteoServer
                     db.Users.Add(new User { Name = data.Name, Password = data.Password, Role = "Developer" });
                     db.SaveChanges();
                     result = "ok";
+                    SessionInfo.ActiveUsers.Add(user);
                 }
                 catch
                 {
@@ -101,6 +129,25 @@ namespace NewMeteoServer
             {
                 if (user.Name == param)
                     return user;
+            }
+            return null;
+        }
+
+        static string AddMap(DBContext db, MapRequestForm map)
+        {
+            db.Maps.Add(new MapDB { Name = map.Name, Bytes = map.Bytes, Values = map.Values });
+            db.SaveChanges();
+
+            return "ok";
+        }
+
+        static MapDB GetMap(DBContext db, string param)
+        {
+            var list = db.Maps.ToList();
+            foreach (var map in list)
+            {
+                if (map.Name == param)
+                    return map;
             }
             return null;
         }

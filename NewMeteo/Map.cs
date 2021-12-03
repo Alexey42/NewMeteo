@@ -5,44 +5,49 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using OpenCvSharp;
+using OpenCvSharp.WpfExtensions;
 
 namespace NewMeteo
 {
     public class Map
     {
-        public Mat image;
+        private Mat image;
+        public Mat Image { 
+            get { return image; }
+            set { image = value; }
+        }
         public string path;
-        public float[,] values;
+        public double[,] values;
 
         public Map()
         {
             image = new Mat();
-            values = new float[0, 0];
+            values = new double[0, 0];
             path = "";
         }
 
         public Map(Map m)
         {
-            image = m.image.Clone();
+            image = m.Image.Clone();
             path = (string)m.path.Clone();
-            values = (float[,])m.values.Clone();
+            values = (double[,])m.values.Clone();
         }
 
         public Map(Mat m, string p)
         {
             image = m;
-            values = new float[m.Cols, m.Rows];
+            values = new double[m.Cols, m.Rows];
             path = p;
         }
 
-        public Map(Mat m, string p, float[,] v)
+        public Map(Mat m, string p, double[,] v)
         {
             image = m;
             values = v;
             path = p;
         }
 
-        public void SetValues(IEnumerable<System.Windows.Point> points, float value)
+        public void SetValues(IEnumerable<System.Windows.Point> points, double value)
         {
             foreach (var p in points)
             {
@@ -61,5 +66,10 @@ namespace NewMeteo
             return image;
         }
 
+        public BitmapSource GetBS()
+        {
+            var t = image.Type();
+            return image.ToBitmapSource();
+        }
     }
 }

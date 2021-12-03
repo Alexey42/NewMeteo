@@ -4,8 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.31624.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewMeteo", "NewMeteo.csproj", "{826E501B-9168-461A-8DD3-E1AEAAB3B804}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6505A2E9-064A-4225-8557-7EC533B50D48} = {6505A2E9-064A-4225-8557-7EC533B50D48}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewMeteoServer", "..\NewMeteoServer\NewMeteoServer.csproj", "{6505A2E9-064A-4225-8557-7EC533B50D48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewMeteoServer", "..\NewMeteoServer\NewMeteoServer.csproj", "{6505A2E9-064A-4225-8557-7EC533B50D48}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

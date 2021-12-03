@@ -13,8 +13,9 @@
                 <MenuItem Header="Open" Click="OpenMap"></MenuItem>
                 <MenuItem Header="Save" Click="SaveMap"></MenuItem>
                 <MenuItem Header="Find" Click="FindMap"></MenuItem>
+                <MenuItem Header="Send to base" Click="SendMap"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Bezier" Click="StartDrawingBezier" />
+            <MenuItem x:Name="btn" Header="Bezier" Click="StartDrawingBezier" />
             <MenuItem Header="Point" Click="StartDrawingPoint" />
             <MenuItem Header="Crop" Click="CropImage" />
             <MenuItem Header="3DView" Click="Show3D" />

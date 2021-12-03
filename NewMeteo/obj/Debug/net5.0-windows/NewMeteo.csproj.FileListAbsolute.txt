@@ -21,12 +21,10 @@ C:\Users\55000\source\repos\NewMeteo\NewMeteo\bin\Debug\net5.0-windows\Npgsql.dl
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\bin\Debug\net5.0-windows\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\bin\Debug\net5.0-windows\System.Diagnostics.DiagnosticSource.dll
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\NewMeteo.csproj.AssemblyReference.cache
-C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\Authorisation.g.cs
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\MainWindow.g.cs
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\App.g.cs
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\NewMeteo_MarkupCompile.cache
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\NewMeteo_MarkupCompile.lref
-C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\Authorisation.baml
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\MainWindow.baml
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\NewMeteo.g.resources
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\NewMeteo.GeneratedMSBuildEditorConfig.editorconfig
@@ -56,3 +54,9 @@ C:\Users\55000\source\repos\NewMeteo\NewMeteo\bin\Debug\net5.0-windows\HelixTool
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\ConfirmHeightWindow.g.cs
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\ConfirmHeightWindow.baml
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\bin\Debug\net5.0-windows\Ookii.Dialogs.Wpf.dll
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\AuthorisationWindow.g.cs
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\AuthorisationWindow.baml
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\SendMapWindow.g.cs
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\SendMapWindow.baml
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\FindMapWindow.g.cs
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\FindMapWindow.baml
