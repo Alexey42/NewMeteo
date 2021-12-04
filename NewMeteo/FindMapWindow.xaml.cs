@@ -36,16 +36,13 @@ namespace NewMeteo
             ServerRequest sr = new ServerRequest();
             var resp = await sr.GetMap(name.Text);
 
-            if (resp == "Not found")
+            if (resp.values.Length == 0)
             {
-                error_message.Content = resp;
+                error_message.Content = "Not found";
             }
             else
             {
-                var reqData = JsonConvert.DeserializeObject<MapRequestForm>(resp);
-                var x = reqData.Values.GetUpperBound(0) + 1;
-                var y = reqData.Values.GetUpperBound(1) + 1;
-                result = new Map(new Mat(y, x, MatType.CV_8UC3, reqData.Bytes), reqData.Name, reqData.Values);
+                result = resp;
                 DialogResult = true;
                 Close();
             }

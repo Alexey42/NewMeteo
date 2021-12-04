@@ -25,7 +25,7 @@ namespace NewMeteoServer
 
             public double[,] Values { get; set; }
 
-            //public string Type { get; set; }
         }
+
     }
 }

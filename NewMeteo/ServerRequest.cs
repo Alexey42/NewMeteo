@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using OpenCvSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,8 +28,11 @@ namespace NewMeteo
 
         public async Task<string> SendMap(string _name, Map _map)
         {
+            Mat mat = _map.Image;
+            var pixels = MatToBytes(mat);
+
             HttpClient client = new HttpClient();
-            var u = new MapRequestForm { Name = _name, Bytes = _map.Image.ToBytes(), Values = _map.values };
+            var u = new MapRequestForm { Name = _name, Bytes = pixels, Values = _map.values };
             var json = JsonConvert.SerializeObject(u);
             var data = new StringContent(json, Encoding.UTF8, "application/json");
             var response = await client.PostAsync("http://localhost:8888/sendmap", data);
@@ -37,13 +41,36 @@ namespace NewMeteo
             return respText;
         }
 
-        public async Task<string> GetMap(string _name)
+        public async Task<Map> GetMap(string _name)
         {
+            var result = new Map();
             HttpClient client = new HttpClient();
             var response = await client.GetAsync("http://localhost:8888/getmap" + "/" + _name);
             var respText = response.Content.ReadAsStringAsync().Result;
+            var reqData = JsonConvert.DeserializeObject<MapRequestForm>(respText);
+            
+            if (respText != "Not found")
+            {
+                var x = reqData.Values.GetUpperBound(0) + 1;
+                var y = reqData.Values.GetUpperBound(1) + 1;
+                result = new Map(new Mat(y, x, MatType.CV_8UC3, reqData.Bytes), reqData.Name, reqData.Values);
+            }
 
-            return respText;
+            return result;
+        }
+
+        public byte[] MatToBytes(Mat mat)
+        {
+            Vec3b[] pixels;
+            mat.GetArray(out pixels);
+            byte[] result = new byte[pixels.Length * 3];
+
+            for (int i = 0; i < result.Length; i++)
+            {
+                result[i] = pixels[i / 3][i % 3];
+            }
+
+            return result;
         }
     }
 }

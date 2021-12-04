@@ -87,7 +87,7 @@ namespace NewMeteo
 
             // Make the surface's material using an image brush.
             ImageBrush texture_brush = new ImageBrush();
-            texture_brush.ImageSource = map.GetBI();
+            texture_brush.ImageSource = map.GetBS();
             DiffuseMaterial surface_material = new DiffuseMaterial(texture_brush);
 
             // Make the mesh's model.

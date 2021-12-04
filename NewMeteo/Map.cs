@@ -68,7 +68,6 @@ namespace NewMeteo
 
         public BitmapSource GetBS()
         {
-            var t = image.Type();
             return image.ToBitmapSource();
         }
     }

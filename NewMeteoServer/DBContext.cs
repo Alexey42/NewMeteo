@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static NewMeteoServer.ServerRequestForms;
 
 namespace NewMeteoServer
 {
@@ -12,6 +13,7 @@ namespace NewMeteoServer
         public DbSet<User> Users { get; set; }
 
         public DbSet<MapDB> Maps { get; set; }
+
 
         public DBContext()
         {

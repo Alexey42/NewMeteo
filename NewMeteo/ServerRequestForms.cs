@@ -24,8 +24,6 @@ namespace NewMeteo
             public byte[] Bytes { get; set; }
 
             public double[,] Values { get; set; }
-
-            //public string Type { get; set; }
         }
     }
 }

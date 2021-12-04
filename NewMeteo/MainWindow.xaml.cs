@@ -63,6 +63,7 @@ namespace NewMeteo
                 Editor2D.History.Push(new Map(CurrentMap));
                 CurrentMap = dialog.result;
                 UpdateImageSource();
+                // Добавить сохранение в папку
             }
         }
 
