@@ -23,6 +23,13 @@ namespace NewMeteo
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
+    
+    static class Presets
+    {
+        public static double rangeCoef = 0.6;
+        public static double decreaseCoef = 0.8;
+    }
+    
     public partial class MainWindow : System.Windows.Window
     {
         Map CurrentMap;
@@ -35,6 +42,7 @@ namespace NewMeteo
         bool Cropping = false;
         int BezierCount = 0;
         List<System.Windows.Point> FigurePoints;
+        
 
         public MainWindow()
         {
@@ -93,6 +101,18 @@ namespace NewMeteo
             SendMapWindow dialog = new SendMapWindow(CurrentMap);
             dialog.ShowDialog();
             //if (dialog.DialogResult == true)
+        }
+
+        private void SetSmoothingCoefs(object sender, RoutedEventArgs e)
+        {
+            SetSmoothingCoefsWindow dialog = new SetSmoothingCoefsWindow();
+            dialog.ShowDialog();
+
+            if (dialog.DialogResult == true)
+            {
+                Presets.rangeCoef = dialog.range;
+                Presets.decreaseCoef = dialog.decrease;
+            }
         }
 
         private void img_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -208,6 +228,12 @@ namespace NewMeteo
             int xAbsolute = (int)e.GetPosition(canvas_main).X;
             int yAbsolute = (int)e.GetPosition(canvas_main).Y;
 
+            if (xRelative < CurrentMap.Image.Width && xRelative >= 0 && 
+                yRelative < CurrentMap.Image.Height && yRelative >= 0)
+            {
+                valueInPoint_lbl.Content = CurrentMap.values[xRelative, yRelative];
+            }
+
             if (MakingWrapper && element.IsMouseCaptured)
             {
                 var st = (ScaleTransform)((TransformGroup)WrapRectangle.RenderTransform)
@@ -256,11 +282,11 @@ namespace NewMeteo
             UpdateImageSource();
 
             double value = ConfirmHeight();
-            if (!double.IsNaN(value))
+            if (!double.IsNaN(value) && FigurePoints.Count > 0)
             {
                 var p = FigurePoints.Last();
                 Editor2D.DrawText(-1, (int)p.X, -1, (int)p.Y, canvas_main, CurrentMap.Image, value.ToString());
-                CurrentMap.SetValues(FigurePoints, value);
+                CurrentMap.SetValues(FigurePoints, value, Presets.rangeCoef, Presets.decreaseCoef);
                 UpdateImageSource();
             }
             else
@@ -301,7 +327,7 @@ namespace NewMeteo
                 {
                     var p = FigurePoints.Last();
                     Editor2D.DrawText(-1, (int)p.X, -1, (int)p.Y, canvas_main, CurrentMap.Image, value.ToString());
-                    CurrentMap.SetValues(FigurePoints, value);
+                    CurrentMap.SetValues(FigurePoints, value, Presets.rangeCoef, Presets.decreaseCoef);
                     UpdateImageSource();
                 }
                 else
@@ -375,5 +401,6 @@ namespace NewMeteo
             img.Source = CurrentMap.GetBS();
             img.UpdateLayout();
         }
+    
     }
 }

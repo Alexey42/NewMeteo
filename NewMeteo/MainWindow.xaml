@@ -19,6 +19,9 @@
             <MenuItem Header="Point" Click="StartDrawingPoint" />
             <MenuItem Header="Crop" Click="CropImage" />
             <MenuItem Header="3DView" Click="Show3D" />
+            <MenuItem Header="Options">
+                <MenuItem Header="Set smoothing" Click="SetSmoothingCoefs" />
+            </MenuItem>
         </Menu>
 
         <Canvas x:Name="canvas_main" Margin="10,27,10,10">
@@ -61,6 +64,7 @@
                     </TransformGroup>
                 </Rectangle.RenderTransform>
             </Rectangle>
+            <Label Name="valueInPoint_lbl" Content="0" Canvas.Right="0" />
         </Canvas>
     </Grid>
 </Window>

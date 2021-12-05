@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\App.xaml
-61355595441
+7-1243599525
 
-162049255569
+171139684774
 222-1400538213
-3DViewWindow.xaml;AuthorisationWindow.xaml;ConfirmHeightWindow.xaml;FindMapWindow.xaml;MainWindow.xaml;SendMapWindow.xaml;
+3DViewWindow.xaml;AuthorisationWindow.xaml;ConfirmHeightWindow.xaml;FindMapWindow.xaml;MainWindow.xaml;SendMapWindow.xaml;SetSmoothingCoefsWindow.xaml;
 
-True
+False
 

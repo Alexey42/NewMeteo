@@ -60,3 +60,5 @@ C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\SendMapWi
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\SendMapWindow.baml
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\FindMapWindow.g.cs
 C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\FindMapWindow.baml
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\SetSmoothingCoefsWindow.g.cs
+C:\Users\55000\source\repos\NewMeteo\NewMeteo\obj\Debug\net5.0-windows\SetSmoothingCoefsWindow.baml

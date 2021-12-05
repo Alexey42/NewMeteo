@@ -18,6 +18,8 @@ namespace NewMeteo
         }
         public string path;
         public double[,] values;
+        public int width;
+        public int height;
 
         public Map()
         {
@@ -31,6 +33,8 @@ namespace NewMeteo
             image = m.Image.Clone();
             path = (string)m.path.Clone();
             values = (double[,])m.values.Clone();
+            width = image.Width;
+            height = image.Height;
         }
 
         public Map(Mat m, string p)
@@ -38,6 +42,8 @@ namespace NewMeteo
             image = m;
             values = new double[m.Cols, m.Rows];
             path = p;
+            width = image.Width;
+            height = image.Height;
         }
 
         public Map(Mat m, string p, double[,] v)
@@ -45,16 +51,15 @@ namespace NewMeteo
             image = m;
             values = v;
             path = p;
+            width = image.Width;
+            height = image.Height;
         }
 
-        public void SetValues(IEnumerable<System.Windows.Point> points, double value)
-        {
-            foreach (var p in points)
-            {
-                values[(int)p.X, (int)p.Y] = value;
-            }
-        }
-
+        /**
+		 * <summary>
+		 * Converts mat to BitmapImage
+		 * </summary>
+		 */
         public BitmapImage GetBI()
         {
             BitmapImage image = new BitmapImage();
@@ -66,9 +71,49 @@ namespace NewMeteo
             return image;
         }
 
+        /**
+		 * <summary>
+		 * Converts mat to BitmapSource
+		 * </summary>
+		 */
         public BitmapSource GetBS()
         {
             return image.ToBitmapSource();
         }
+
+        /**
+		 * <summary>
+		 * Method that put height data on map
+		 * </summary>
+		 *
+		 * <param name="points">Points of new surface </param>
+		 * <param name="value">New height</param>
+		 * <param name="rangeCoef">Defines area of new surface</param>
+		 * <param name="decreaseCoef">Defines how fast decreases height around</param>
+		 */
+        public void SetValues(IEnumerable<System.Windows.Point> points, double value, 
+            double rangeCoef, double decreaseCoef)
+        {
+            foreach (var p in points)
+            {
+                int x = (int)p.X;
+                int y = (int)p.Y;
+                int range = (int)(value * rangeCoef);
+                values[x, y] = value;
+
+                for (int i = -range; i <= range; i++)
+                    for (int j = -range; j <= range; j++)
+                        if (x + i < width && x + i >= 0 && y + j < height && y + j >= 0)
+                        {
+                            var k = Math.Sqrt(i * i + j * j) / decreaseCoef;
+                            if (i * j != 0 && value - k > values[x + i, y + j])
+                            {
+                                values[x + i, y + j] = value - k;
+                            }
+                        }
+            }
+        }
+
+        
     }
 }

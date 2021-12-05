@@ -26,6 +26,11 @@ namespace NewMeteo
             return respText;
         }
 
+        /**
+		 * <summary>
+		 * Send current map to server
+		 * </summary>
+		 */
         public async Task<string> SendMap(string _name, Map _map)
         {
             Mat mat = _map.Image;
@@ -41,6 +46,11 @@ namespace NewMeteo
             return respText;
         }
 
+        /**
+		 * <summary>
+		 * Return desired map from server
+		 * </summary>
+		 */
         public async Task<Map> GetMap(string _name)
         {
             var result = new Map();

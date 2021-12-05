@@ -65,12 +65,6 @@ namespace NewMeteo
             CurrentImage.PutText(value, new Point(xRel, yRel), HersheyFonts.HersheyComplex, 0.5, Scalar.Red);
         }
 
-        public static float[,] SmoothSurface(float[,] values)
-        {
-
-
-            return values;
-        }
 
         private static float X(float t, float x0, float x1, float x2, float x3)
         {
