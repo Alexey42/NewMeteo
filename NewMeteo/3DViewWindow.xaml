@@ -14,6 +14,7 @@
 
         <helix:HelixViewport3D x:Name="viewPort3d" Margin="0,22,0,0">
             <helix:DefaultLights />
+            
         </helix:HelixViewport3D>
         
     </Grid>

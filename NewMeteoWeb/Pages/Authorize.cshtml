@@ -1,0 +1,42 @@
+﻿@page
+@model NewMeteoWeb.Pages.AuthorizeModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Вход</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <div class="window-back"></div>
+    <div class="window authorization-window">
+        <form asp-action="Auth" class="signIn">
+            <h2>Войти</h2>
+            <label for="name">Имя:</label>
+            <input type="text" name="name" value="">
+            <label for="password">Пароль:</label>
+            <input type="password" name="password" value="">
+            @Html.Hidden("type", "Sign in")
+            <button type="submit" name="signIn-accept">Ok</button>
+            <a class="changeSignType">Регистрация</a>
+        </form>
+        <form asp-action="Auth" class="signUp">
+            <h2>Зарегистрироваться</h2>
+            <label for="name">Имя:</label>
+            <input type="text" name="name" value="">
+            <label for="password">Пароль:</label>
+            <input type="password" name="password" value="">
+            @Html.Hidden("type", "Sign up")
+            <button type="submit" name="signUp-accept">Ok</button>
+            <a class="changeSignType">Уже есть аккаунт</a>
+        </form>
+    </div>
+    <script type="text/javascript">
+        $(".signUp").hide();
+    </script>
+</body>
+</html>

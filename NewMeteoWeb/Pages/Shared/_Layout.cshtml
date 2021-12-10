@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - NewMeteoWeb</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container navigation">
+            <a class="navbar-brand" href="">NewMeteoWeb</a>
+            <ul class="navbar">
+                <li class="navbar-item">
+                    Проект
+                    <ul class="submenu">
+                        <li class="navbar-subitem"><input type="file" class="open-file" onchange="openFromUser(this)" /></li>
+                        <li class="navbar-subitem"><a href="javascript:showGetMapWindow()">Find</a></li>
+                    </ul>
+                </li>
+                <li class="navbar-item"><a href="">Безье</a></li>
+                <li class="navbar-item"><a href="">Точка</a></li>
+                <li class="navbar-item"><a href="">3D вид</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="window-back"></div>
+    <div class="window getMap-window">
+        <form asp-action="GetMap" class="getMapForm">
+            <label for="name">Название карты:</label>
+            <input type="text" name="name" value="r" />
+            <button type="submit">Ok</button>
+        </form>
+    </div>
+        
+
+    <div class="container main">
+        @RenderBody()
+    </div>
+
+    <footer>
+        <div class="container">
+
+        </div>
+    </footer>
+
+    <script type="text/javascript">
+        
+    </script>
+    
+    <script src="~/js/uiScript.js" type="text/javascript"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -57,10 +57,10 @@ namespace NewMeteo
             HttpClient client = new HttpClient();
             var response = await client.GetAsync("http://localhost:8888/getmap" + "/" + _name);
             var respText = response.Content.ReadAsStringAsync().Result;
-            var reqData = JsonConvert.DeserializeObject<MapRequestForm>(respText);
             
             if (respText != "Not found")
             {
+                var reqData = JsonConvert.DeserializeObject<MapRequestForm>(respText);
                 var x = reqData.Values.GetUpperBound(0) + 1;
                 var y = reqData.Values.GetUpperBound(1) + 1;
                 result = new Map(new Mat(y, x, MatType.CV_8UC3, reqData.Bytes), reqData.Name, reqData.Values);
