@@ -96,6 +96,9 @@ li.navbar-subitem {
 li.navbar-subitem:hover {
   background-color: #DDDDD1;
 }
+.navigation .username {
+    float: right;
+}
 
 
 div.getMap-window form {
@@ -140,11 +143,42 @@ div.authorization-window form a {
   margin-top: 15px;
   cursor: pointer;
 }
+div.authorization-window .response-text {
+  color: red;
+  font-size: 14px;
+}
 
 
 div.canvas {
   display: block;
   background-color: lightgray;
+}
+
+
+div.list {
+  width: 50%;
+  float: left;
+}
+div.list div {
+  display: -webkit-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+div.list div:nth-of-type(2n+1) {
+  background-color: #AAC2FF;
+}
+div.list a {
+  margin-left: 30px;
+}
+div.list img {
+  width: 20px;
+  height: 20px;
+}
+.add-button {
+  margin-left: 30px;
 }
 
 

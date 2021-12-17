@@ -14,7 +14,7 @@
 <body>
     <div class="window-back"></div>
     <div class="window authorization-window">
-        <form asp-action="Auth" class="signIn">
+        <form class="signIn" method="post">
             <h2>Войти</h2>
             <label for="name">Имя:</label>
             <input type="text" name="name" value="">
@@ -22,9 +22,9 @@
             <input type="password" name="password" value="">
             @Html.Hidden("type", "Sign in")
             <button type="submit" name="signIn-accept">Ok</button>
-            <a class="changeSignType">Регистрация</a>
+            <a class="changeSignType">Регистрация</a> 
         </form>
-        <form asp-action="Auth" class="signUp">
+        <form class="signUp" method="post">
             <h2>Зарегистрироваться</h2>
             <label for="name">Имя:</label>
             <input type="text" name="name" value="">
@@ -34,9 +34,34 @@
             <button type="submit" name="signUp-accept">Ok</button>
             <a class="changeSignType">Уже есть аккаунт</a>
         </form>
+        <p class="response-text"></p>
     </div>
+
     <script type="text/javascript">
         $(".signUp").hide();
+
+        $(function () {
+            $(".signIn").submit(function (e) {
+                e.preventDefault();
+                $(".response-text").text("");
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Authorize", "ServerRequest")',
+                    data: $(this).serialize(),
+                    dataType: "json",
+                    error: function (response) {
+                        
+                        if (response.responseText.startsWith("https://")) {
+                            window.location.replace(response.responseText);
+                            console.log(response.responseText);
+                        }
+                        else {
+                            $(".response-text").text(response.responseText);
+                        }
+                    }
+                });
+            })
+        });
     </script>
 </body>
 </html>

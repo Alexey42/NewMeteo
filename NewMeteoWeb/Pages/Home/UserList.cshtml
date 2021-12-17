@@ -1,0 +1,66 @@
+﻿@page
+@model NewMeteoWeb.Pages.UserListModel
+@{
+    ViewData["Title"] = "UserList";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="response-text"></div>
+<div class="list">
+    @foreach (var item in Model.list)
+    {
+        <div>
+            <p>
+                @Html.DisplayFor(m => item.Name)
+            </p>
+            <img class="delete-button" src="~/delete.png" />
+        </div>
+    }
+    <form method="post">
+        <input type="text" name="name">
+        <input type="password" name="password">
+        @Html.Hidden("type", "Sign up")
+        <button type="submit" name="signUp-accept">Ok</button>
+    </form>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("form").submit(function (e) {
+            e.preventDefault();
+            $(".response-text").text("");
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("AddUser", "ServerRequest")',
+                data: $(this).serialize(),
+                dataType: "json",
+                error: function (response) {
+                    if (response.responseText == "ok") {
+                        location.reload();
+                    }
+                    else {
+                        $(".response-text").text(response.responseText);
+                    }
+                }
+            });
+        })
+    });
+
+    $(function () {
+        $(".delete-button").click(function (e) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("DeleteUser", "ServerRequest")',
+                data: e.currentTarget.parentElement.innerText,
+                contentType: "text/plain",
+                error: function (response) {
+                    $(".response-text").text(response.responseText);
+                },
+                success: function () {
+                    location.reload();
+                }
+
+            });
+        })
+    });
+</script>

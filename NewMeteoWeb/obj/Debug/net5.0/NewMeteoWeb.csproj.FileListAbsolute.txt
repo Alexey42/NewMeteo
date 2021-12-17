@@ -39,4 +39,7 @@ C:\Users\55000\source\repos\NewMeteo\NewMeteoWeb\obj\Debug\net5.0\NewMeteoWeb.ge
 C:\Users\55000\source\repos\NewMeteo\NewMeteoWeb\obj\Debug\net5.0\NewMeteoWeb.csproj.CopyComplete
 C:\Users\55000\source\repos\NewMeteo\NewMeteoWeb\bin\Debug\net5.0\Newtonsoft.Json.dll
 C:\Users\55000\source\repos\NewMeteo\NewMeteoWeb\obj\Debug\net5.0\Razor\Pages\Index.cshtml.g.cs
-C:\Users\55000\source\repos\NewMeteo\NewMeteoWeb\obj\Debug\net5.0\Razor\Pages\Authorize.cshtml.g.cs
+C:\Users\55000\source\repos\NewMeteo\NewMeteoWeb\obj\Debug\net5.0\Razor\Pages\MapList.cshtml.g.cs
+C:\Users\55000\source\repos\NewMeteo\NewMeteoWeb\obj\Debug\net5.0\Razor\Pages\Home\UserList.cshtml.g.cs
+C:\Users\55000\source\repos\NewMeteo\NewMeteoWeb\obj\Debug\net5.0\Razor\Pages\Home\MapList.cshtml.g.cs
+C:\Users\55000\source\repos\NewMeteo\NewMeteoWeb\obj\Debug\net5.0\Razor\Pages\Home\Authorize.cshtml.g.cs

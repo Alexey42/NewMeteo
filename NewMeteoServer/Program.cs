@@ -50,6 +50,22 @@ namespace NewMeteoServer
                     else
                         responseString = SignUp(db, reqData, user);
                 }
+                if (seg[1] == "deluser/")
+                {
+                    if (seg.Length < 3)
+                        responseString = "Not found";
+                    else
+                    {
+                        DBContext db = new DBContext();
+                        User user = FindUser(db, seg[2]);
+                        if (user == null)
+                            responseString = "Not found";
+                        else
+                        {
+                            responseString = DeleteUser(db, user);
+                        }
+                    }
+                }
                 if (seg[1] == "sendmap")
                 {
                     var reqData = JsonConvert.DeserializeObject<MapRequestForm>(json);
@@ -73,6 +89,33 @@ namespace NewMeteoServer
                             responseString = JsonConvert.SerializeObject(u);
                         }
                     }
+                }
+                if (seg[1] == "delmap/")
+                {
+                    if (seg.Length < 3)
+                        responseString = "Not found";
+                    else
+                    {
+                        DBContext db = new DBContext();
+                        MapDB found = GetMap(db, seg[2]);
+                        if (found == null)
+                            responseString = "Not found";
+                        else
+                        {
+                            responseString = DeleteMap(db, found);
+                        }
+                    }
+                }
+                if (seg[1] == "getallmaps")
+                {
+                    DBContext db = new DBContext();
+                    responseString = JsonConvert.SerializeObject(GetAllMaps(db));
+
+                }
+                if (seg[1] == "getallusers")
+                {
+                    DBContext db = new DBContext();
+                    responseString = JsonConvert.SerializeObject(GetAllUsers(db));
                 }
 
                 byte[] buffer = System.Text.Encoding.UTF8.GetBytes(responseString);
@@ -133,6 +176,38 @@ namespace NewMeteoServer
             return null;
         }
 
+        static string DeleteUser(DBContext db, User user)
+        {
+            string result;
+            try
+            {
+                db.Users.Remove(user);
+                db.SaveChanges();
+                result = "ok";
+            }
+            catch
+            {
+                result = "Database isn't responding";
+            }
+            return result;
+        }
+
+        static string DeleteMap(DBContext db, MapDB map)
+        {
+            string result;
+            try
+            {
+                db.Maps.Remove(map);
+                db.SaveChanges();
+                result = "ok";
+            }
+            catch
+            {
+                result = "Database isn't responding";
+            }
+            return result;
+        }
+
         static string AddMap(DBContext db, MapRequestForm map)
         {
             db.Maps.Add(new MapDB { Name = map.Name, Bytes = map.Bytes, Values = map.Values });
@@ -151,6 +226,16 @@ namespace NewMeteoServer
             }
 
             return null;
+        }
+
+        static List<MapDB> GetAllMaps(DBContext db)
+        {
+            return db.Maps.ToList();
+        }
+
+        static List<User> GetAllUsers(DBContext db)
+        {
+            return db.Users.ToList();
         }
     }
 }

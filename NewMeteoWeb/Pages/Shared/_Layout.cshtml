@@ -12,22 +12,22 @@
         <div class="container navigation">
             <a class="navbar-brand" href="">NewMeteoWeb</a>
             <ul class="navbar">
-                <li class="navbar-item">
-                    Проект
-                    <ul class="submenu">
-                        <li class="navbar-subitem"><input type="file" class="open-file" onchange="openFromUser(this)" /></li>
-                        <li class="navbar-subitem"><a href="javascript:showGetMapWindow()">Find</a></li>
-                    </ul>
-                </li>
-                <li class="navbar-item"><a href="">Безье</a></li>
-                <li class="navbar-item"><a href="">Точка</a></li>
-                <li class="navbar-item"><a href="">3D вид</a></li>
+                <li class="navbar-item">@Html.ActionLink("Вход", "Authorize", "Home")</li>
+                <li class="navbar-item"><a class="logOut-button">Выход</a></li>
+                <li class="navbar-item">@Html.ActionLink("Список карт", "MapList", "Home")</li>
+                <li class="navbar-item">@Html.ActionLink("Список пользователей", "UserList", "Home")</li>
+                <p class="username">
+                    @{
+                        @SessionManager.CurrentUser;
+                    }
+                </p>
             </ul>
+            
         </div>
     </header>
     <div class="window-back"></div>
     <div class="window getMap-window">
-        <form asp-action="GetMap" class="getMapForm">
+        <form class="getMap-form" class="getMapForm" method="post">
             <label for="name">Название карты:</label>
             <input type="text" name="name" value="r" />
             <button type="submit">Ok</button>
@@ -46,7 +46,40 @@
     </footer>
 
     <script type="text/javascript">
-        
+        $(function () {
+            $(".logOut-button").click(function (e) {
+                //$(".response-text").text("");
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("LogOut", "ServerRequest")',
+                    error: function (response) {
+                        
+                    }
+                });
+            })
+        });
+
+        $(function () {
+            $(".getMap-form").submit(function (e) {
+                e.preventDefault();
+                //$(".response-text").text("");
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("GetMap", "ServerRequest")',
+                    data: $(this).serialize(),
+                    dataType: "json",
+                    error: function (response) {
+                        if (response.responseText.startsWith("https://")) {
+                            window.location.replace(response.responseText);
+                        }
+                        else {
+                            console.log(response);
+                            $(".canvas").text(response.responseText);
+                        }
+                    }
+                });
+            })
+        });
     </script>
     
     <script src="~/js/uiScript.js" type="text/javascript"></script>

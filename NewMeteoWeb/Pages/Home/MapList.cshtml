@@ -1,0 +1,40 @@
+﻿@page
+@model NewMeteoWeb.Pages.Home.MapListModel
+@{
+    ViewData["Title"] = "MapList";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<div class="response-text"></div>
+<div class="list">
+    @foreach (var item in Model.list)
+    {
+        <div>
+            <p>
+                @Html.DisplayFor(m => item.Name)
+            </p>
+            <img class="delete-button" src="~/delete.png" />
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+
+    $(function () {
+        $(".delete-button").click(function (e) {
+            $.ajax({
+                type: "GET",
+                url: '@Url.Action("DeleteMap", "ServerRequest")',
+                data: e.currentTarget.parentElement.innerText,
+                contentType: "text/plain",
+                error: function (response) {
+                    $(".response-text").text(response.responseText);
+                },
+                success: function () {
+                    location.reload();
+                }
+
+            });
+        })
+    });
+</script>
